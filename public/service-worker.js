@@ -1,3 +1,4 @@
+// All files to save for offline functionality
 const FILES_TO_CACHE = [
     "/",
     "./css/styles.css",
@@ -12,10 +13,12 @@ const FILES_TO_CACHE = [
     "./icons/icon-384x384.png",
     "./icons/icon-512x512.png",
 ];
+// Cache name components
 const APP_PREFIX = 'BudgetTracker-';
 const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION;
 
+// Service Worker installation
 self.addEventListener('install', function (e) {
     e.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
@@ -25,6 +28,7 @@ self.addEventListener('install', function (e) {
     )
 });
 
+// Service Worker activation
 self.addEventListener('activate', function (e) {
     e.waitUntil(
         caches.keys().then(function (keyList) {
@@ -44,6 +48,7 @@ self.addEventListener('activate', function (e) {
     );
 });
 
+// Service Worker intercept fetch requests
 self.addEventListener('fetch', function (e) {
     console.log('fetch request : ' + e.request.url)
     e.respondWith(
