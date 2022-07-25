@@ -1,4 +1,5 @@
 # Budget Tracker
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
@@ -8,7 +9,7 @@ Budget Tracker is a PWA that allows for budget tracking on and offline. MongoDB 
 ## Links
 
 [Code repository](https://github.com/wgrout87@gmail.com/budget-tracker)
-[Deployed website](https://wgrout87@gmail.com.github.io/budget-tracker/)
+[Deployed website](https://fathomless-springs-34063.herokuapp.com/)
 
 ## Table of Contents
 
@@ -18,11 +19,22 @@ Budget Tracker is a PWA that allows for budget tracking on and offline. MongoDB 
 
 ## Installation
 
-This repository can be downloaded and run locally. After cloning the repository, run the command "npm i" to download and install the dependencies for the app. Then the command "npm start" will run an express server allowing for app access at localhost:3001. MongoDB is required for this application.
+MongoDB is required for this application.
+
+This repository can be downloaded and run locally. After cloning the repository, run the command "npm i" to download and install the dependencies for the app. Then the command "npm start" will run an express server allowing for app access at localhost:3001.
+
+```
+npm i
+npm start
+```
+
+As the app is also a PWA, the app can also be downloaded from the deployed website.
 
 ## Usage
 
 Budget Tracker is a simple app allowing the user to input added funds or expenses in order to track their total financial assets. Simply add a name for the transaction, the amount of the transaction, and then click either of the buttons ("Add Funds" or "Subtract Funds") depending on the nature of the transaction. The app will then add the transaction to its database and display an updated chart showing the effects of all past transactions.
+
+![Budget Tracker Screenshot](./public/images/fathomless-springs-34063.herokuapp.com_.png)
 
 ## License
 
