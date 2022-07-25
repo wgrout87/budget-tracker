@@ -35,6 +35,8 @@ function saveRecord(record) {
     const transactionObjectStore = transaction.objectStore('new_transactions');
 
     transactionObjectStore.add(record);
+
+    alert('You\'re currently offline. Transaction has been saved for submission when internet connection is restored.')
 };
 
 function uploadTransaction() {
@@ -74,7 +76,7 @@ function uploadTransaction() {
                     // Clear all items in your store
                     transactionObjectStore.clear();
 
-                    alert('All saved transaction has been submitted')
+                    alert('You\'re back online. All saved transaction has been submitted.');
                 })
                 .catch(err => {
                     console.log(err);

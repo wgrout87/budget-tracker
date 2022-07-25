@@ -1,6 +1,8 @@
 // All files to save for offline functionality
 const FILES_TO_CACHE = [
     "/",
+    "/api/transaction",
+    "./manifest.json",
     "./css/styles.css",
     "./js/index.js",
     "./js/idb.js",
@@ -19,17 +21,18 @@ const VERSION = 'version_01';
 const CACHE_NAME = APP_PREFIX + VERSION;
 
 // Service Worker installation
-self.addEventListener('install', function (e) {
+self.oninstall = function (e) {
     e.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
             console.log('installing cache : ' + CACHE_NAME);
             return cache.addAll(FILES_TO_CACHE);
         })
     )
-});
+};
 
 // Service Worker activation
-self.addEventListener('activate', function (e) {
+self.onactivate = function (e) {
+    console.log('activate');
     e.waitUntil(
         caches.keys().then(function (keyList) {
             let cacheKeeplist = keyList.filter(function (key) {
@@ -46,14 +49,21 @@ self.addEventListener('activate', function (e) {
             }));
         })
     );
-});
+};
 
 // Service Worker intercept fetch requests
-self.addEventListener('fetch', function (e) {
-    console.log('fetch request : ' + e.request.url)
+self.onfetch = function (e) {
+    console.log('fetch request : ' + e.request.url);
+    // Update the saved /api/transaction GET request if connected to the internet
+    if (navigator.onLine) {
+        caches.open(CACHE_NAME).then(function (cache) {
+            cache.delete('/api/transaction');
+            cache.add('/api/transaction')
+        })
+    };
     e.respondWith(
         caches.match(e.request).then(function (request) {
             return request || fetch(e.request)
         })
     );
-})
+};
