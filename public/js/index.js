@@ -111,6 +111,8 @@ function sendTransaction(isAdding) {
   populateChart();
   populateTable();
   populateTotal();
+  // WHEN the user inputs an expense or deposit
+  // THEN they will receive a notification that they have added an expense or deposit
   isAdding ? alert('Funds deposited.') : alert('Expense added.');
 
   // also send to server
