@@ -1,6 +1,5 @@
 const FILES_TO_CACHE = [
     "/",
-    "/api/transaction",
     "./css/styles.css",
     "./js/index.js",
     "./js/idb.js",
@@ -51,5 +50,5 @@ self.addEventListener('fetch', function (e) {
         caches.match(e.request).then(function (request) {
             return request || fetch(e.request)
         })
-    )
+    );
 })
