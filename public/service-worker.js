@@ -24,7 +24,6 @@ const CACHE_NAME = APP_PREFIX + VERSION;
 self.oninstall = function (e) {
     e.waitUntil(
         caches.open(CACHE_NAME).then(function (cache) {
-            console.log('installing cache : ' + CACHE_NAME);
             return cache.addAll(FILES_TO_CACHE);
         })
     )
@@ -32,7 +31,6 @@ self.oninstall = function (e) {
 
 // Service Worker activation
 self.onactivate = function (e) {
-    console.log('activate');
     e.waitUntil(
         caches.keys().then(function (keyList) {
             let cacheKeeplist = keyList.filter(function (key) {
@@ -43,7 +41,6 @@ self.onactivate = function (e) {
 
             return Promise.all(keyList.map(function (key, i) {
                 if (cacheKeeplist.indexOf(key) === -1) {
-                    console.log('deleting cache : ' + keyList[i]);
                     return caches.delete(keyList[i]);
                 }
             }));
@@ -53,7 +50,6 @@ self.onactivate = function (e) {
 
 // Service Worker intercept fetch requests
 self.onfetch = function (e) {
-    console.log('fetch request : ' + e.request.url);
     // Update the saved /api/transaction GET request if connected to the internet
     if (navigator.onLine) {
         caches.open(CACHE_NAME).then(function (cache) {
